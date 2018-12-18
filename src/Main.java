@@ -20,7 +20,7 @@ public class Main {
         mediaManager.logMediaFolder("media");
 
         ArrayList<String> list = mediaManager.readMediaFolder("media");
-        for (String e: list) {
+        for (String e : list) {
             System.out.println(e);
         }
 
@@ -32,7 +32,11 @@ public class Main {
 //        mediaManager.database(billede);
 //        mediaManager.database(artikel);
 
-
     }
+
+
+
 }
+
+
 
