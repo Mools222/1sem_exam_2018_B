@@ -2,9 +2,7 @@ import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class MediaManager {
 
@@ -12,8 +10,9 @@ public class MediaManager {
 
     public void logMediaFolder(String folderNavn) {
         File file = new File(folderNavn);
-        File[] list = file.listFiles();
+        File[] list = file.listFiles(); // Initialize an array of File objects
 
+        // Display the file name of each file
         for (File e : list) {
             System.out.println(e.getName());
         }
@@ -21,14 +20,17 @@ public class MediaManager {
 
     public ArrayList readMediaFolder(String folderNavn) {
         File file = new File(folderNavn);
-        File[] list = file.listFiles();
-        ArrayList<String> stringList = new ArrayList<>();
+        File[] list = file.listFiles(); // Initialize an array of File objects
+        ArrayList<String> stringList = new ArrayList<>(); // Create an ArrayList to store Strings
 
         for (File e : list) {
+            // Add the file name to the ArrayList of Strings
             stringList.add(e.getName());
 
+            // Get the file type using the substring method
             String filtype = e.getName().substring(e.getName().lastIndexOf('.') + 1);
 
+            // Instantiates a new media object based on the file name
             if (filtype.equals("mp4") || filtype.equals("m4v") || filtype.equals("mov")) {
                 Video video = new Video();
             } else if (filtype.equals("jpg") || filtype.equals("png") || filtype.equals("gif")) {
@@ -41,6 +43,7 @@ public class MediaManager {
         return stringList;
     }
 
+    // This method inserts data into the database using SQL statements. The method's formal parameter is an instance of Media. Since Video, Billede and Artikel extend the Media class, instances of these classes can be passed to the method
     public void database(Media media) {
         PreparedStatement preparedStatement;
 
@@ -48,7 +51,7 @@ public class MediaManager {
             if (media instanceof Video) {
                 String query = "INSERT INTO Video (Filtype, Laengde, Oploesning, Fotograf) VALUES (?, ?, ?, ?)";
                 preparedStatement = connection.prepareStatement(query);
-                preparedStatement.setString(1, ((Video) media).getFiltype());
+                preparedStatement.setString(1, ((Video) media).getFiltype()); // Since the declared type is Media, casting must be used to call methods from the actual type
                 preparedStatement.setString(2, ((Video) media).getLaenge());
                 preparedStatement.setString(3, ((Video) media).getOploesning());
                 preparedStatement.setString(4, ((Video) media).getFotograf());
@@ -78,6 +81,7 @@ public class MediaManager {
         }
     }
 
+    // This method updates data in the database using SQL statements
     public void rettelse(int id, String tabel, String kolonne, String rettelse) {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:33067/semesterproeve", "root", "")) {
 
@@ -101,6 +105,7 @@ public class MediaManager {
         }
     }
 
+    // This method deletes data in the database using SQL statements
     public void slet(int id, String tabel) {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:33067/semesterproeve", "root", "")) {
 

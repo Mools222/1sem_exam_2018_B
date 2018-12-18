@@ -18,11 +18,11 @@ public class GUI extends Application {
     public void start(Stage primaryStage) {
         MediaManager mediaManager = new MediaManager();
 
-        TextArea textArea = new TextArea();
-        textArea.setEditable(false);
+        // BorderPane
         BorderPane borderPane = new BorderPane();
         borderPane.setPadding(new Insets(10, 10, 5, 10));
 
+        // Top node of the BorderPane
         HBox hBox1 = new HBox();
         hBox1.setAlignment(Pos.CENTER);
 
@@ -33,13 +33,13 @@ public class GUI extends Application {
         hBox1.getChildren().addAll(labelOverskrift);
         borderPane.setTop(hBox1);
 
+        // Center node of the BorderPane
+        TextArea textArea = new TextArea();
+        textArea.setEditable(false);
         borderPane.setCenter(textArea);
         BorderPane.setMargin(textArea, new Insets(5));
 
-        HBox hBox2 = new HBox();
-        hBox2.setSpacing(5);
-        hBox2.setPadding(new Insets(5));
-
+        // Center node of the BorderPane
         Label labelVisFilnavne = new Label("Vis folderindhold");
         TextField textFieldVisFilnavne = new TextField("Indtast foldernavn");
         Button buttonFilnavne = new Button("Vis filnavne");
@@ -53,8 +53,9 @@ public class GUI extends Application {
         vBoxRight.getChildren().addAll(labelVisFilnavne, textFieldVisFilnavne, buttonFilnavne, blank, labelVisFil, textFieldVisFil, buttonVisFil);
         borderPane.setRight(vBoxRight);
 
-        // Buttons - Right
+        // Buttons to the right
 
+        // When pressed this button shows file names in the TextArea
         buttonFilnavne.setOnAction(e -> {
             if (textFieldVisFilnavne.getText().length() == 0) {
                 textArea.setText("Indtast venligst foldernavn.");
@@ -70,11 +71,13 @@ public class GUI extends Application {
             }
         });
 
+        // When pressed this button opens the file in a different Stage
         buttonVisFil.setOnAction(e -> {
             Stage stage = new Stage();
             String filtype = textFieldVisFil.getText().substring(textFieldVisFil.getText().lastIndexOf('.') + 1);
             StackPane pane = new StackPane();
 
+            // If the file type matches that of a video, a MediaView object is created and displayed
             if (filtype.equals("mp4") || filtype.equals("m4v") || filtype.equals("mov")) {
                 pane.getChildren().clear();
                 Media media = new Media(getClass().getResource(textFieldVisFil.getText()).toString());
@@ -87,6 +90,7 @@ public class GUI extends Application {
                 pane.getChildren().add(mediaView);
             }
 
+            // If the file type matches that of a picture, an ImageView object is created and displayed
             if (filtype.equals("jpg") || filtype.equals("png") || filtype.equals("gif")) {
                 pane.getChildren().clear();
                 Image image = new Image(getClass().getResourceAsStream(textFieldVisFil.getText()));
@@ -100,7 +104,7 @@ public class GUI extends Application {
             stage.show(); // Display the stage
         });
 
-        // Left node
+        // Left node of the BorderPane - Just a bunch of GUI elements
         ScrollPane scrollPaneLeft = new ScrollPane();
         scrollPaneLeft.setPadding(new Insets(0, 5, 0, 5));
         scrollPaneLeft.setPrefWidth(200);
@@ -185,7 +189,7 @@ public class GUI extends Application {
         scrollPaneLeft.setContent(vBoxLeft);
         borderPane.setLeft(scrollPaneLeft);
 
-        // Buttons - Left
+        // Buttons to the left
 
         buttonOpretVideo.setOnAction(e -> {
             Video video = new Video(textFieldOpretVideo1.getText(), textFieldOpretVideo2.getText(), textFieldOpretVideo3.getText(), textFieldOpretVideo4.getText());
@@ -240,9 +244,6 @@ public class GUI extends Application {
             mediaManager.slet(Integer.parseInt(textFieldSletArtikel.getText()), "Artikel");
             textArea.setText("Artikel slettet.");
         });
-
-        // Right node
-
 
         // Create a scene and place it in the stage
         Scene scene = new Scene(borderPane, 1000, 500);

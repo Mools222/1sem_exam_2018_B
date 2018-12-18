@@ -28,14 +28,9 @@ public class Main {
         Billede billede = new Billede("gif", 595, 842, "Peter Kurtsen");
         Artikel artikel = new Artikel("Some Guy", "Bla bla bla.", "media\\guy.tiff");
 
-//        mediaManager.database(video);
-//        mediaManager.database(billede);
-//        mediaManager.database(artikel);
-
-        String numeric = "124";
-        for (int j = 0; j < numeric.length(); j++) {
-            System.out.println(Character.isDigit(numeric.charAt(j)));
-        }
+        mediaManager.database(video);
+        mediaManager.database(billede);
+        mediaManager.database(artikel);
 
     }
 }
