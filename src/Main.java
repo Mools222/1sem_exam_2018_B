@@ -32,10 +32,12 @@ public class Main {
 //        mediaManager.database(billede);
 //        mediaManager.database(artikel);
 
+        String numeric = "124";
+        for (int j = 0; j < numeric.length(); j++) {
+            System.out.println(Character.isDigit(numeric.charAt(j)));
+        }
+
     }
-
-
-
 }
 
 

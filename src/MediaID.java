@@ -15,6 +15,8 @@ public class MediaID {
     // Data field
     private static int latestId = 100;
 
+    // Since it has no explicit constructor, this class contains a default constructor
+
     // Method
     // Public visibility modifier means the method can be accessed from any other classes.
     // Static methods can be called without creating an instance of the class.
@@ -23,8 +25,6 @@ public class MediaID {
 
         // Creates an instance of the File class with the parameter "media_id.txt"
         File file = new File("media_id.txt");
-
-        // Since it has no explicit constructor, this class contains a default constructor
 
         // Låser filen op før adgang
         // file.setWritable(true);

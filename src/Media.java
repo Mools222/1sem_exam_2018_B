@@ -9,6 +9,7 @@ public class Media {
     private String name;
     private Date created = new Date();
     private String fileName;
+    private boolean brugergenereret;
 
     // No args constructor
     public Media() {
@@ -49,6 +50,14 @@ public class Media {
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
+    }
+
+    public boolean isBrugergenereret() {
+        return brugergenereret;
+    }
+
+    public void setBrugergenereret(boolean brugergenereret) {
+        this.brugergenereret = brugergenereret;
     }
 
     // Overrides the toString method from the superclass Object

@@ -1,0 +1,1 @@
+Ved at tilføje en boolean ved navn "brugergenereret" (og tilhørende accessor og mutator) til klassen "Media" kan man skelne mellem brugergenereret indhold og indhold som er lavet af TV2. Da klasserne "Video" og "Billede" nedarver fra klassen "Media" får disse klasser også adgang til getter og setter metoderne.
