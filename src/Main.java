@@ -1,3 +1,6 @@
+import java.io.File;
+import java.util.ArrayList;
+
 public class Main {
 
     // Public static named constants
@@ -12,6 +15,14 @@ public class Main {
         // Creates an instance of the Test class
         Test.test();
 
+        MediaManager mediaManager = new MediaManager();
+
+        mediaManager.logMediaFolder("media");
+
+        ArrayList<String> list = mediaManager.readMediaFolder("media");
+        for (String e: list) {
+            System.out.println(e);
+        }
     }
 }
 
