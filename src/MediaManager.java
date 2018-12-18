@@ -14,7 +14,7 @@ public class MediaManager {
         File file = new File(folderNavn);
         File[] list = file.listFiles();
 
-        for (File e: list) {
+        for (File e : list) {
             System.out.println(e.getName());
         }
     }
@@ -24,7 +24,7 @@ public class MediaManager {
         File[] list = file.listFiles();
         ArrayList<String> stringList = new ArrayList<>();
 
-        for (File e: list) {
+        for (File e : list) {
             stringList.add(e.getName());
 
             String filtype = e.getName().substring(e.getName().lastIndexOf('.') + 1);
@@ -74,7 +74,51 @@ public class MediaManager {
                 preparedStatement.executeUpdate();
             }
         } catch (Exception ex) {
-            System.out.println(ex);
+            ex.printStackTrace();
+        }
+    }
+
+    public void rettelse(int id, String tabel, String kolonne, String rettelse) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:33067/semesterproeve", "root", "")) {
+
+            String query = "UPDATE " + tabel + " SET " + kolonne + " = ? WHERE VideoID = ?";
+
+            if (tabel.equalsIgnoreCase("Video"))
+                query = "UPDATE " + tabel + " SET " + kolonne + " = ? WHERE VideoID = ?";
+
+            if (tabel.equalsIgnoreCase("Billede"))
+                query = "UPDATE " + tabel + " SET " + kolonne + " = ? WHERE BilledeID = ?";
+
+            if (tabel.equalsIgnoreCase("Artikel"))
+                query = "UPDATE " + tabel + " SET " + kolonne + " = ? WHERE ArtikelID = ?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, rettelse);
+            preparedStatement.setInt(2, id);
+            preparedStatement.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void slet(int id, String tabel) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:33067/semesterproeve", "root", "")) {
+
+            String query = "";
+            if (tabel.equalsIgnoreCase("Video"))
+                query = "DELETE FROM " + tabel + " WHERE VideoID = ?";
+
+            if (tabel.equalsIgnoreCase("Billede"))
+                query = "DELETE FROM " + tabel + " WHERE BilledeID = ?";
+
+            if (tabel.equalsIgnoreCase("Artikel"))
+                query = "DELETE FROM " + tabel + " WHERE ArtikelID = ?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 
