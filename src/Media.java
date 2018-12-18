@@ -4,17 +4,21 @@ import java.util.Date;
 
 public class Media {
 
+    // Data fields
     private int assetId;
     private String name;
     private Date created = new Date();
     private String fileName;
 
-
+    // No args constructor
     public Media() {
         assetId = MediaID.generate();
         created = Date.from(Instant.now());
     }
 
+    // Methods
+
+    // Getters & setters for all the data fields
     public int getAssetId() {
         return assetId;
     }
@@ -47,6 +51,7 @@ public class Media {
         this.fileName = fileName;
     }
 
+    // Overrides the toString method from the superclass Object
     @Override
     public String toString() {
         return "Media{" +
