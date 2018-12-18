@@ -61,4 +61,8 @@ public class Media {
                 ", fileName='" + fileName + '\'' +
                 '}';
     }
+
+    public void logToConsol() {
+        System.out.println("Navn: " + name + " Medietype: Media");
+    }
 }

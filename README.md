@@ -86,7 +86,7 @@ Opret 3 nye klasser, som skal repræsentere hhv. billede, video og artikel medie
 ### Opgave 5 - Metoder
 Opret en metode ved navnet **logToConsol()** i klassen **Media**, som skal printe klassens **name** instansvariable  og klassens medietype (i dette tilfælde Media) til consollen.
 
-Override nu denne metode i Video, Billede og Artikel subclasses, så de skriver de respektive medietyper til konsolen i stedet for "Media".
+Override nu denne metode i Video, Artikel og Billede subclasses, så de skriver de respektive medietyper til konsolen i stedet for "Media".
 
 Opdater klassediagrammet så det afspejler ændringerne i koden.
 
